@@ -2,10 +2,10 @@ package com.musthafa.springboot.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.musthafa.springboot.models.UserEntity;
 import com.musthafa.springboot.repositories.UserRepository;
 
@@ -17,7 +17,7 @@ public class UserServiceImplementation implements UserService {
 	@Override
 	public List<UserEntity> listUsers() {
 		// TODO Auto-generated method stub
-		List<UserEntity> result = (List<UserEntity>) userRepository.findAll();
+		List<UserEntity> result = userRepository.findAll();
 		if (result.isEmpty())
 			return new ArrayList<UserEntity>();
 		else
@@ -43,7 +43,7 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public Optional<UserEntity> listUserById(int userId) {
+	public UserEntity listUserById(int userId) {
 		// TODO Auto-generated method stub
 		return userRepository.findById(userId);
 	}

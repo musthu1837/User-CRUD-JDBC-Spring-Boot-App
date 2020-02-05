@@ -28,4 +28,11 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(UserAlreadyExistsException.class)
+	public final ResponseEntity<ExceptionResponse> handleUserAlreadyExistsExceptions(Exception ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+				request.getDescription(false));
+
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.CONFLICT);
+	}
 }

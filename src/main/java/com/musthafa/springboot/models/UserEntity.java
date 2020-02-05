@@ -1,6 +1,5 @@
 package com.musthafa.springboot.models;
 
-
 public class UserEntity {
 
 	private int userId;
@@ -8,7 +7,7 @@ public class UserEntity {
 	private int userAge;
 	private double userSalary;
 
-	public UserEntity(int userId, String userName, int userAge, double userSalary) {
+	public UserEntity(int userId, int userAge, String userName, double userSalary) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
