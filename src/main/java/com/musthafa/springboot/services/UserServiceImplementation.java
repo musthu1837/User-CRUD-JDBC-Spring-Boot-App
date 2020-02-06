@@ -2,6 +2,7 @@ package com.musthafa.springboot.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,27 +26,40 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public void addUser(UserEntity user) {
+	public int addUser(UserEntity user) {
 		// TODO Auto-generated method stub
-		userRepository.save(user);
+		Optional<UserEntity> existingUser = Optional.ofNullable(userRepository.findById(user.getUserId()));
+		if (!existingUser.isPresent())
+			return userRepository.save(user);
+		else
+			return 0;
 	}
 
 	@Override
-	public void deleteUserById(int userId) {
+	public int deleteUserById(int userId) {
 		// TODO Auto-generated method stub
-		userRepository.deleteById(userId);
+		Optional<UserEntity> existingUser = Optional.ofNullable(userRepository.findById(userId));
+		if (existingUser.isPresent())
+			return userRepository.deleteById(userId);
+		else
+			return 0;
 	}
 
 	@Override
-	public void updateUser(UserEntity user) {
+	public int updateUser(UserEntity user) {
 		// TODO Auto-generated method stub
-		userRepository.update(user);
+		Optional<UserEntity> existingUser = Optional.ofNullable(userRepository.findById(user.getUserId()));
+		if (existingUser.isPresent())
+			return userRepository.update(user);
+		else
+			return 0;
 	}
 
 	@Override
-	public UserEntity listUserById(int userId) {
+	public Optional<UserEntity> listUserById(int userId) {
+
 		// TODO Auto-generated method stub
-		return userRepository.findById(userId);
+		return Optional.ofNullable(userRepository.findById(userId));
 	}
 
 }
